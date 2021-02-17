@@ -1,0 +1,12 @@
+Olá tudo bem?
+
+Obrigado por se inscrever no Eventex!
+Estes são os dados que você utilizou:
+Nome: {{ name }}
+CPF: {{ cpf }}
+email: {{ email }}
+Telefone: {{ phone }}
+
+Atenciosamente
+----
+Eventex

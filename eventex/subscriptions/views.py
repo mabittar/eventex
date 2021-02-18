@@ -18,8 +18,8 @@ def subscribe(request):
 
             mail.send_mail('Confirmação de Inscrição',
                            body,
-                           'contato@eventex.com',
-                           ['contato@eventex.com', form.cleaned_data['email']]
+                           'ma_bittar@yahoo.com.br',
+                           ['ma_bittar@yahoo.com.br', form.cleaned_data['email']]
                            )
 
             messages.success(request, 'Inscrição realizada com sucesso!')

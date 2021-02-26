@@ -24,7 +24,7 @@ All documentation is in the "docs" directory and online at https://docs.djangopr
   1. clone o repositório
   2. crie o venv com Python 3.6 ou superior
   3. ative o venv
-  4. instale as dependências utilizando `pip install -r requirements.txt`
+  4. instale as dependências utilizando `pip install -r requirements-dev.txt`
   5. configure a instância com .env utilizando `cp contrib/.env-sample .env` esse comando vai copiar o arquivo que está na pasta contrib para a raíz do seu diretório. É necessário editá-lo com as suas configurações.
   6. execute os testes com `python manage.py test`
 

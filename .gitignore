@@ -4,7 +4,9 @@ __pycache__
 tempCodeRunnerFile.py
 .vscode/launch.json
 .vscode/
+.ipynb_checkpoints/
 /staticfiles/
+etc/
 
 ### venv ###
 # Virtualenv

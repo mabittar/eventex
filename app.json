@@ -1,0 +1,18 @@
+{
+  "name": "heroku-django",
+  "description": "A simple project to get started with Django on Heroku",
+  "repository": "https://github.com/mabittar/eventex",
+  "keywords": ["python", "django", "test"],
+  "env": {
+    "DJANGO_SECRET_KEY": {
+      "description": "A randomly generated secret to secure your Django installation",
+      "generator": "secret"
+    }
+  },
+  "scripts": {
+    "postdeploy": [
+      "python manage.py migrate --noinput",
+      "python manage.py test"
+    ]
+  }
+}

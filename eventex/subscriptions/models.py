@@ -1,7 +1,9 @@
 from django.db import models
+import uuid
 
 
 class Subscriptions(models.Model):
+	hashid = models.UUIDField('hashID', default=uuid.uuid4, editable=False)
 	name = models.CharField('nome', max_length=100)
 	cpf = models.CharField('CPF', max_length=11)
 	email = models.EmailField('e-mail', )

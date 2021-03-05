@@ -9,7 +9,7 @@ class SubscriptionDetailGet(TestCase):
 			cpf='12345678901',
 			email='ma_bittar@yahoo.com.br',
 			phone='21-98888-2134')
-		self.resp = self.client.get('/inscricao/{}/'.format(self.obj.pk))
+		self.resp = self.client.get('/inscricao/{}/'.format(self.obj.hashid))
 
 	def test_get(self):
 		self.assertEqual(200, self.resp.status_code)

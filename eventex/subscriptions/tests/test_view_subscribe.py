@@ -63,10 +63,11 @@ class SubscribePostValid(TestCase):
 
     def test_post(self):
         """
-        Valid POST should redirect to /inscicao/1/
+        Valid POST should redirect to /inscricao/86a04bab-a8be-4d49-8c0e-11ae0c11daf9/
         """
         # self.assertEqual(302, self.resp.status_code)
-        self.assertRedirects(self.resp, '/inscricao/1/')
+        subscription = self.resp.context['subscription'].hashid
+        self.assertRedirects(self.resp, '/inscricao/{}/'.format(subscription))
 
     def test_send_email(self):
         """

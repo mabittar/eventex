@@ -26,5 +26,5 @@ class SubscriptionsModelTest(TestCase):
 
 class SubscriptionNotFound(TestCase):
 	def test_not_found(self):
-		resp = self.client.get('/inscricao/0/')
+		resp = self.client.get('/inscricao/86a04bab-a8be-4d49-8c0e-11ae0c11daf9/')
 		self.assertEqual(404, resp.status_code)

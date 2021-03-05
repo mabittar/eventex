@@ -23,3 +23,8 @@ class SubscriptionsModelTest(TestCase):
 
 	def test_str(self):
 		self.assertEqual('Marcel Bittar', str(self.obj))
+
+class SubscriptionNotFound(TestCase):
+	def test_not_found(self):
+		resp = self.client.get('/inscricao/0/')
+		self.assertEqual(404, resp.status_code)

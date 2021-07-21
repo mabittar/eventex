@@ -31,7 +31,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=(Csv()))
 
 # From email definition
-DEFAULT_FROM_EMAIL = 'ma_bittar@yahoo.com.br'
+DEFAULT_FROM_EMAIL = config('LOCAL_EMAIL')
 
 # Application definition
 

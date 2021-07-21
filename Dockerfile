@@ -1,31 +1,7 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
-FROM python:3.9-alpine
+FROM python:3.8-slim-buster
 
 EXPOSE 8000
-ENV VAR1=10
-
-ENV PATH="/Scripts:${PATH}"
-ENV PATH="manage.py:${PATH}"
-
-# Install pip requirements
-COPY ./requirements.txt /requirements.txt
-COPY ./requirements-dev.txt /requirements-dev.txt
-RUN apk add --update --no-cache --virtual .tmp gcc libc-dev linux-headers
-RUN python -m pip install -r /requirements-dev.txt
-RUN apk del .tmp
-
-# Creating work directory
-RUN mkdir /eventex
-COPY ./ /eventex
-WORKDIR /eventex
-COPY ./Scripts /eventex/Script
-
-# Change executable permission for scripts folder
-RUN chmod +x /eventex/Scripts/*
-
-# creating media and static directory in docker
-RUN mkdir -p /vol/web/media
-RUN mkdir -p /vol/web/static
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -33,18 +9,20 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED=1
 
+# Install pip requirements
+COPY requirements.txt .
+COPY requirements-dev.txt .
+RUN python -m pip install -r requirements-dev.txt
 
-# Switching to a non-root user, please refer to https://aka.ms/vscode-docker-python-user-rights
-# TODO: entender melhor a criação de usuários e permissões
-RUN adduser -D user && chown -R user /eventy
-RUN chown -R user:user /vol
-RUN chmod -R 755 /vol/web
-USER user
+WORKDIR /app
+COPY . /app
 
-RUN echo 'alias manage="$VIRTUAL_ENV/../manage.py"' >> ~/.bashrc
-
-CMD ["entrypoint.sh"]
+# Creates a non-root user with an explicit UID and adds permission to access the /app folder
+# For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
+RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+USER appuser
+# Alias for manage.py
+RUN echo 'alias manage="./manage.py"' >> ~/.bashrc
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-# File wsgi.py was not found in subfolder: 'wttd_dock'. Please enter the Python path to wsgi file.
-# CMD ["gunicorn", "--bind", "127.0.0.1:8000", "pythonPath.to.wsgi"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "eventex.wsgi"]

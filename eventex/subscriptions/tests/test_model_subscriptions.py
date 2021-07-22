@@ -24,6 +24,10 @@ class SubscriptionsModelTest(TestCase):
 	def test_str(self):
 		self.assertEqual('Marcel Bittar', str(self.obj))
 
+	def test_paid_default_must_be_false(self):
+		'''by default paid must be False'''
+		self.assertEqual(False, self.obj.paid)
+
 class SubscriptionNotFound(TestCase):
 	def test_not_found(self):
 		resp = self.client.get('/inscricao/86a04bab-a8be-4d49-8c0e-11ae0c11daf9/')

@@ -57,7 +57,7 @@ class SubscriptionsNewGet(TestCase):
 
 class SubscriptionsNewPost(TestCase):
     def setUp(self):
-        data = dict(name='Marcel Bittar', cpf='12345678901',
+        data = dict(name='Marcel Bittar', cpf='01234567890',
                     email='ma_bittar@yahoo.com.br', phone='21-98888-2134')
         self.resp = self.client.post(r('subscriptions:new'), data)
 

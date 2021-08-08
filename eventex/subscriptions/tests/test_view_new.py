@@ -112,3 +112,10 @@ class SubscriptionsNewPostInvalid(TestCase):
 #
 #         response = self.client.post('/inscricao/', data, follow=True)
 #         self.assertContains(response, 'Inscrição realizada com sucesso!')
+
+class TemplateRegressionTest(TestCase):
+    def test_template_has_non_field_erros(self):
+        invalid_data = dict(name='Marcel Bittar', cpf='01234567890')
+        response = self.client.post(r('subscriptions:new'), invalid_data)
+
+        self.assertContains(response, '<ul class="errorlist nonfield">')
